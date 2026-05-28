@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CW21.DataAccess": {
+      "commandName": "Project"
+    },
+    "Profile 1": {
+      "commandName": "Project"
+    }
+  }
+}
