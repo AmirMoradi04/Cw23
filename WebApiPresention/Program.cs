@@ -6,6 +6,18 @@ namespace WebApiPresention
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin() // ????? ?? ??? ??????
+                    .AllowAnyMethod() // ????? ?? ??? ????? (GET, POST, etc.)
+                    .AllowAnyHeader(); // ????? ?? ??? ?????
+                });
+            });
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             // Add services to the container.
 
@@ -15,10 +27,14 @@ namespace WebApiPresention
 
             var app = builder.Build();
 
+            app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
+               
             }
 
             app.UseHttpsRedirection();

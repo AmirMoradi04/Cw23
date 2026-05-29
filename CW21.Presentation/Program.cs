@@ -3,11 +3,15 @@
 using CW21.Presentation.Data;
 using CW21.Presentation.Entities;
 using CW21.Presentation.Repositories;
+using CW21.Presentation.Service;
 using static System.Reflection.Metadata.BlobBuilder;
 
 var context = new AppDbContext();
 var bookRepo = new BookRepository(context);
 var publisherRepo = new PublisherRepository(context);
+var bookService = new BookService(context);
+
+
 
 //await bookRepo.BookStockUpdate(8, 10);
 
@@ -16,6 +20,7 @@ foreach(var item in publisher)
 {
     Console.WriteLine($"{item.publisherName} , {item.price}");
 }
+
 
 
 //var result = await bookRepo.ShowAllBookWhitInfo();
