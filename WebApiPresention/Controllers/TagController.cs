@@ -11,12 +11,17 @@ namespace WebApiPresention.Controllers
     [Route("[controller]")]
     public class TagController : Controller
     {
-        private readonly TagService  _tagService = new TagService(new AppDbContext());
+        private readonly TagService _tagService;
+
+        public TagController(TagService tagService)
+        {
+            _tagService = tagService;
+        }
 
         [HttpGet(Name = "GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var tags =await _tagService.GetAllTags();
+            var tags = await _tagService.GetAllTags();
 
             return Ok(tags);
             
@@ -70,6 +75,7 @@ namespace WebApiPresention.Controllers
 
             return Ok(check);
         }
+
         [HttpDelete("RemoveTagFromBook")]
         public async Task<IActionResult> RemoveTagFromBook([FromBody]AddTagToBook2Dto request)
         {
@@ -81,7 +87,5 @@ namespace WebApiPresention.Controllers
 
             return Ok(check);
         }
-
-
     }
 }

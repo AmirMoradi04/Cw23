@@ -52,14 +52,12 @@ namespace CW21.Presentation.Service
                                 TitleBook = x.Title,
                                 AuterName = x.Author.FullName,
                                 Price = x.Price
-
                             })
                             .ToList();
         }
 
         public async Task CreateTag(string name)
-        {
-            
+        {  
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name)); 
@@ -74,12 +72,11 @@ namespace CW21.Presentation.Service
             var tag = new Tag
             {
                 Name = name
-                
             };
 
             await _context.Tags.AddAsync(tag);
 
-          await  _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             Console.WriteLine($"id : {tag.Id} , name : {tag.Name} ");
         }

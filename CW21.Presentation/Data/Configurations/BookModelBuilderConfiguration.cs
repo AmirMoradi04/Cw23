@@ -17,7 +17,7 @@ public class BookModelBuilderConfiguration : BaseModelBuilderConfiguration<Book>
             .HasDefaultValue(0);
             
             
-        //TODOO
+        //TODO
         
         modelBuilder.Property(u => u.PublishYear)
             .IsRequired();
@@ -25,22 +25,19 @@ public class BookModelBuilderConfiguration : BaseModelBuilderConfiguration<Book>
         modelBuilder.Property(u => u.CreatedAt)
             .IsRequired();
         
-        modelBuilder.HasIndex(u => u.AuthorId)
-            ;
-        
-        modelBuilder.HasIndex(u => u.CategoryId)
-            ;
+        modelBuilder.HasIndex(u => u.AuthorId);
+
+        modelBuilder.HasIndex(u => u.CategoryId);
 
         modelBuilder.HasOne(b => b.Author)
             .WithMany(a => a.Books)
             .HasForeignKey(b => b.AuthorId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         modelBuilder.HasOne(b => b.Category)
             .WithMany(c => c.Books)
             .HasForeignKey(b => b.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
-
 
         modelBuilder.Property(s => s.Stock)
             .IsRequired()

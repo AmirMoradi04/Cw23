@@ -86,7 +86,8 @@ namespace CW21.Presentation.Service
 
         public async Task<Tag?> FindTagById(int tagId)
         {
-            var tag = await _context.Tags.AsNoTracking().FirstOrDefaultAsync(x => x.Id == tagId);
+            var tag = await _context.Tags.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == tagId);
             if(tag == null)
             {
                 return null;
@@ -99,9 +100,9 @@ namespace CW21.Presentation.Service
             var tag = await _context.Tags.Include(x => x.Books)
                 .FirstOrDefaultAsync(x => x.Id == tagid);
             if( tag == null)
-                {
-                    return false; 
-                }
+            {
+                return false; 
+            }
 
             var book = await _context.Books.FirstOrDefaultAsync(x => x.Id == bookid);
             if( book == null )
@@ -109,7 +110,7 @@ namespace CW21.Presentation.Service
                 return false;
             }
             tag.Books.Add(book);    
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return true;
 
         }

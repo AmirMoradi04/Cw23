@@ -23,11 +23,11 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<List<Category>> ShowAllCategoryInfo()
     {
-        return await _context.Categories.AsNoTracking() 
+        return await _context.Categories.AsNoTracking()
             .AsNoTracking()
             .Include(c => c.Books)
             .ThenInclude(b => b.Author)
-            .ToListAsync(); 
+            .ToListAsync();
     }
 
    

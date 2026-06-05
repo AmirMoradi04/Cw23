@@ -1,4 +1,9 @@
 
+using CW21.Presentation.Data;
+using CW21.Presentation.Service;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace WebApiPresention
 {
     public class Program
@@ -19,6 +24,12 @@ namespace WebApiPresention
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreDBConnection")));
+
+            builder.Services.AddScoped<TagService>();
+            builder.Services.AddScoped<BookService>();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -34,7 +45,7 @@ namespace WebApiPresention
                 app.MapOpenApi();
                 app.UseSwagger();
                 app.UseSwaggerUI();
-               
+
             }
 
             app.UseHttpsRedirection();

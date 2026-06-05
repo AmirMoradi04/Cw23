@@ -55,12 +55,12 @@ public class BookModelBuilderConfiguration : BaseModelBuilderConfiguration<Book>
                     .WithMany(x => x.Books)
                     .UsingEntity(j =>
                     {
-                        j.ToTable("BookTags");
-
-                        j.HasData(
-                        new { BooksId = 1, TagsId = 1 },
-                        new { BooksId = 1, TagsId = 2 },
-                        new { BooksId = 1, TagsId = 3 }
+                          j.ToTable("BookTags");
+                          
+                          j.HasData(
+                          new { BooksId = 1, TagsId = 1 },
+                          new { BooksId = 1, TagsId = 2 },
+                          new { BooksId = 1, TagsId = 3 }
                         );
                     });
 

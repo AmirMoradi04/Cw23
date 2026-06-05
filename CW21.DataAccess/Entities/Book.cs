@@ -32,7 +32,7 @@ public class Book : BaseEntity
     [Range(0, int.MaxValue, ErrorMessage = "Kamtar az sefre ke")]
     [Required]
     public int Stock { get; set; }
-    public int? PublisherId { get; set; }
+    public int PublisherId { get; set; }
 
     public Publisher Publisher { get; set; }
 
