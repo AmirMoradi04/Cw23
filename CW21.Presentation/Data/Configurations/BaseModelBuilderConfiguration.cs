@@ -6,11 +6,9 @@ namespace CW21.Presentation.Data.Configurations;
 
 public abstract class BaseModelBuilderConfiguration<T> :IEntityTypeConfiguration<T> where T : BaseEntity
 {
-   
     public void Configure(EntityTypeBuilder<T> builder)
     {
         builder.HasKey(x => x.Id);
-
 
         ApplyEntityConfiguration(builder);
     }

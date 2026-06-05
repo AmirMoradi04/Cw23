@@ -11,16 +11,14 @@ namespace CW21.Presentation.Data.Configurations
     {
         protected override void ApplyEntityConfiguration(EntityTypeBuilder<Tag> modelBuilder)
         {
-           modelBuilder.Property(t =>t.Name)
+           modelBuilder.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(50);
 
             modelBuilder.HasIndex(t => t.Name)
                 .IsUnique();
 
-
             modelBuilder.HasData(SeedData.SeedData.CreateTag);
-
         }
     }
 }

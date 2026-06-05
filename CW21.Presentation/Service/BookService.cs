@@ -38,16 +38,16 @@ namespace CW21.Presentation.Service
 
         public async Task<BookDetailsDto> GetBookDetailsAsync(int bookId)
         {
-            var books =await _context.Books.AsNoTracking()
+            var books = await _context.Books.AsNoTracking()
                 .Where(b => b.Id == bookId)
-                .Select(b =>new BookDetailsDto{
+                .Select(b => new BookDetailsDto{
                     Title = b.Title,
                     Stock = b.Stock,
                     Price = b.Price,
                     PublisherName = b.Publisher.Name,
                     PublishYear = b.PublishYear,
-                    AuthorName =b.Author.FullName,
-                    CategoryName =b.Category.Name,
+                    AuthorName = b.Author.FullName,
+                    CategoryName = b.Category.Name,
                     Tags = b.Tags.Select(t => t.Name).ToList()
 
 

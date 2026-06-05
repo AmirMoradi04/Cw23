@@ -11,7 +11,6 @@ public static class SeedData
             Id = 1,
             Name = "Programming",
             CreatedAt = new DateTime(2026,05,01)
-
         },
         new Tag
         {

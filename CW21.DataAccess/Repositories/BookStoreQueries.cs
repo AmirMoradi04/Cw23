@@ -111,19 +111,18 @@ namespace CW21.Presentation.Repositories
         // 12. حذف کتاب
         public async Task DeleteBook(int bookId)
         {
-            var book = await _context.Books.FindAsync(bookId);
-            if (book == null)
+            var books = await _context.Books.FindAsync(bookId);
+            if(books is null)
             {
-                Console.WriteLine("کتاب یافت نشد.");
+                Console.WriteLine("Book Is Null!");
                 return;
             }
 
-            _context.Books.Remove(book);
+            _context.Books.Remove(books);
             await _context.SaveChangesAsync();
-            Console.WriteLine("کتاب حذف شد.");
 
             int remainingCount = await _context.Books.CountAsync();
-            Console.WriteLine($"تعداد کتاب‌های باقی‌مانده: {remainingCount}");
+            Console.WriteLine($"Remaining Books Count : {remainingCount}");
         }
 
         // 13. گزارش دسته‌بندی (تعداد کتاب‌ها و جمع موجودی هر دسته)
@@ -170,10 +169,8 @@ namespace CW21.Presentation.Repositories
                 .Select(a => new
                 {
                     AuthorName = a.FullName,
-                    TopBook = a.Books.OrderByDescending(b => b.Price).FirstOrDefault()
-                })
-                .Where(x => x.TopBook != null)
-                .ToListAsync();
+                    TopBook = a.Books.OrderByDescending(a => a.Price).FirstOrDefault()
+                }).ToListAsync();
 
             var result = await query;
 

@@ -32,7 +32,6 @@ namespace CW21.Presentation.Repositories
                 {
                    publisherName = p.Name,
                    bookCount = p.Books.Count()
-
                 })
                 .ToListAsync();
         }
@@ -40,14 +39,13 @@ namespace CW21.Presentation.Repositories
         public async Task<List<PublisherBookInfoDto>> ShowInfoPublisherDto()
         {
             return await _dbContext.Publishers.AsNoTracking()
-
                 .Select(p => new PublisherBookInfoDto
                 {
                    PublisherName = p.Name,
 
                    BookCount = p.Books.Count(),
 
-                   SumBook =p.Books.Sum(b => b.Stock),
+                   SumBook = p.Books.Sum(p => p.Stock),
 
                    AveragePriceBook = p.Books.Average(b => b.Price)
 
@@ -61,10 +59,8 @@ namespace CW21.Presentation.Repositories
                 .Select (p => new MaxPricePublisherBookDto
                 {
                     publisherName = p.Name,
-                    price =p.Books.Max(b => b.Price),
+                    price = p.Books.Max(b => b.Price),
                     bookTitle = p.Books.OrderByDescending(b => b.Price).FirstOrDefault().Title
-
-
                 }).ToListAsync ();  
         }
 
@@ -121,6 +117,5 @@ namespace CW21.Presentation.Repositories
             int PublisherCount = await _dbContext.Publishers.CountAsync();
             Console.WriteLine($"Count Publisher : {PublisherCount}");
         }
-
     }
 }

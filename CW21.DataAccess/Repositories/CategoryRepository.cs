@@ -15,7 +15,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<List<Book>> GetBooksByCategoryIdAsync(int categoryId)
     {
-        return await _context.Books.AsNoTracking() //?????? ???? ??????? 
+        return await _context.Books.AsNoTracking()
             .Where(b => b.CategoryId == categoryId)
             .ToListAsync();
     }
@@ -23,12 +23,10 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<List<Category>> ShowAllCategoryInfo()
     {
-        return await _context.Categories.AsNoTracking() 
+        return await _context.Categories
             .AsNoTracking()
             .Include(c => c.Books)
             .ThenInclude(b => b.Author)
-            .ToListAsync(); 
+            .ToListAsync();
     }
-
-   
 }
