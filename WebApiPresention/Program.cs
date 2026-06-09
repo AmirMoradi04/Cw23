@@ -29,6 +29,7 @@ namespace WebApiPresention
 
             builder.Services.AddScoped<TagService>();
             builder.Services.AddScoped<BookService>();
+            builder.Services.AddScoped<AuthorService>();
 
             // Add services to the container.
 
