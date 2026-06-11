@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CW21.DataAccess\CW21.DataAccess.csproj" />
     <ProjectReference Include="..\CW21.Presentation\CW21.Presentation.csproj" />
   </ItemGroup>
 
