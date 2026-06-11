@@ -38,7 +38,7 @@ namespace CW21.Presentation.Service
         //       TitleBook = x.Title,
         //       AuterName =x.Author.FullName,
         //       Price =x.Price
-              
+
         //   })
         //   .ToListAsync();
         //}
@@ -57,10 +57,10 @@ namespace CW21.Presentation.Service
         }
 
         public async Task CreateTag(string name)
-        {  
+        {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException(nameof(name)); 
+                throw new ArgumentNullException(nameof(name));
             }
             var isTag = await _context.Tags.AnyAsync(x => x.Name == name);
 
@@ -79,6 +79,18 @@ namespace CW21.Presentation.Service
             await _context.SaveChangesAsync();
 
             Console.WriteLine($"id : {tag.Id} , name : {tag.Name} ");
+        }
+
+        public async Task<Tag?> FindTagById(int id)
+        {
+            var tag = await _context.Tags.AsNoTracking()
+           .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tag == null)
+            {
+                throw new Exception("Tag Not Found !!");
+            }
+            return tag;
         }
     }
 }
