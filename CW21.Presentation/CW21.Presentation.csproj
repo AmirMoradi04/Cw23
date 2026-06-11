@@ -8,11 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CW21.DataAccess\CW21.DataAccess.csproj" />
-      <ProjectReference Include="..\CW21.Service\CW21.Service.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
           <PrivateAssets>all</PrivateAssets>
