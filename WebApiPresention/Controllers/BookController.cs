@@ -1,5 +1,7 @@
-﻿using CW21.Presentation.Service;
+﻿using CW21.Presentation.Data.Dto;
+using CW21.Presentation.Service;
 using Microsoft.AspNetCore.Mvc;
+using WebApiPresention.DTO;
 
 namespace WebApiPresention.Controllers
 {
@@ -21,10 +23,15 @@ namespace WebApiPresention.Controllers
         //    return Ok(books);
         //}
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync() => Ok(await _bookService.GetAllBooksAsync());
+        public async Task<IActionResult> GetAllAsync() => Ok(await _bookService.GetAllBookServiceAsync());
 
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetByIdAsync(int id) => Ok(await _bookService.GetBookByIdAsync(id));
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            var book = await _bookService.GetBookByIdAsync(id);
+
+            return Ok(GenericResult<BookDetailsDto>.Success(book,"Found Successfully Dadash"));
+        }
 
         [HttpGet("available")]
         public async Task<IActionResult> GetAllAvailableBooks() => Ok(await _bookService.GetBookByStock());

@@ -30,6 +30,7 @@ namespace WebApiPresention
             builder.Services.AddScoped<TagService>();
             builder.Services.AddScoped<BookService>();
             builder.Services.AddScoped<AuthorService>();
+            builder.Services.AddScoped<ExceptionHandlingMiddleware>();
 
             // Add services to the container.
 
@@ -46,13 +47,13 @@ namespace WebApiPresention
                 app.MapOpenApi();
                 app.UseSwagger();
                 app.UseSwaggerUI();
-
             }
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.MapControllers();
 

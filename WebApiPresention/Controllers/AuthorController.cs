@@ -1,6 +1,9 @@
-﻿using CW21.Presentation.Service;
+﻿using CW21.Presentation.Data.Dto;
+using CW21.Presentation.Entities;
+using CW21.Presentation.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiPresention.DTO;
 
 namespace WebApiPresention.Controllers
 {
@@ -21,9 +24,9 @@ namespace WebApiPresention.Controllers
             var authors = await _authorService.GetAllAuthors();
 
             if (!authors.Any())
-                return NotFound();
+                throw new Exception("Author Not Found !");
 
-            return Ok(authors);
+            return Ok(GenericResult<List<AuthorNameDto>>.Success(authors));
         }
 
         [HttpGet("{id:int}")]
