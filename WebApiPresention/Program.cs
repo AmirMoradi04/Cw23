@@ -1,8 +1,10 @@
 
 using CW21.Presentation.Data;
 using CW21.Presentation.Service;
+using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using WebApiPresention.Filters;
 
 namespace WebApiPresention
 {
@@ -30,7 +32,10 @@ namespace WebApiPresention
             builder.Services.AddScoped<TagService>();
             builder.Services.AddScoped<BookService>();
             builder.Services.AddScoped<AuthorService>();
-            builder.Services.AddScoped<ExceptionHandlingMiddleware>();
+            builder.Services.AddScoped<ClientDetail>();
+            builder.Services.AddControllers(option => {
+                option.Filters.Add<ClientDetail>();
+            });
 
             // Add services to the container.
 
@@ -53,7 +58,13 @@ namespace WebApiPresention
 
             app.UseAuthorization();
 
+            app.UseMiddleware<SendProgramToSiteMiddleware>();
+
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+            app.UseMiddleware<IPAuthenticationMiddleware>();
+
+            app.MapGet("/",() => "Success"); 
 
             app.MapControllers();
 

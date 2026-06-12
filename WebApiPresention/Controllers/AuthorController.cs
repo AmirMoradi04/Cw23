@@ -4,6 +4,7 @@ using CW21.Presentation.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApiPresention.DTO;
+using WebApiPresention.Filters;
 
 namespace WebApiPresention.Controllers
 {
@@ -18,18 +19,19 @@ namespace WebApiPresention.Controllers
             _authorService = authorService; 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllAuthors()
-        {
-            var authors = await _authorService.GetAllAuthors();
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllAuthors()
+        //{
+        //    var authors = await _authorService.GetAllAuthors();
 
-            if (!authors.Any())
-                throw new Exception("Author Not Found !");
+        //    if (!authors.Any())
+        //        throw new Exception("Author Not Found !");
 
-            return Ok(GenericResult<List<AuthorNameDto>>.Success(authors));
-        }
+        //    return Ok(GenericResult<List<AuthorNameDto>>.Success(authors));
+        //}
 
         [HttpGet("{id:int}")]
+        [ServiceFilter(typeof(ClientDetail))]
         public async Task<IActionResult> GetAuthorById([FromRoute]int id)
         {
             var authors = await _authorService.GetAuthorById(id);

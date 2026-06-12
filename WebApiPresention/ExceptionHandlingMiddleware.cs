@@ -55,7 +55,7 @@ namespace WebApiPresention
                 
                message: message,
                statusCode: statusCode
-                );
+            );
 
             var option = new JsonSerializerOptions
             {
