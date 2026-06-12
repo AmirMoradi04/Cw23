@@ -15,6 +15,7 @@ namespace WebApiPresention
             192
         };
 
+
         public SendProgramToSiteMiddleware(RequestDelegate next)
         {
             _next = next;
@@ -22,6 +23,7 @@ namespace WebApiPresention
 
         public async Task Invoke(HttpContext httpContext)
         {
+            httpContext.Connection.RemoteIpAddress = IPAddress.Parse("34.12.5.1");
             var ip = httpContext.Connection.RemoteIpAddress;
 
             if (ip is not null && ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)

@@ -44,6 +44,7 @@ namespace WebApiPresention
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
+            app.UseMiddleware<SendProgramToSiteMiddleware>();
 
             app.UseCors("AllowAll");
             // Configure the HTTP request pipeline.
@@ -58,7 +59,6 @@ namespace WebApiPresention
 
             app.UseAuthorization();
 
-            app.UseMiddleware<SendProgramToSiteMiddleware>();
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
